@@ -30,6 +30,8 @@ namespace cis237assignment4
             this.material = Material;
             this.model = Model;
             this.color = Color;
+
+            CalculateTotalCost();
         }
 
         //Virtual method that can be overridden in the derived classes if needed.
@@ -65,6 +67,16 @@ namespace cis237assignment4
             return "Material: " + this.material + Environment.NewLine +
                     "Model: " + this.model + Environment.NewLine +
                     "Color: " + this.color + Environment.NewLine;
+        }
+
+        public virtual int CompareTo(Droid _droid)
+        {
+            if (_droid==null)
+            {
+                return 1;
+            }
+
+            return TotalCost.CompareTo(_droid.TotalCost);
         }
     }
 }

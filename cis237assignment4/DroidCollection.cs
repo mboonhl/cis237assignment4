@@ -124,5 +124,77 @@ namespace cis237assignment4
             //return the completed string
             return returnString;
         }
+
+        private void PreLoadArray()
+        {
+            Add("Carbonite", "Protocol", "Red", 10);
+            Add("Vanadium", "Protocol", "Blue", 20);
+            Add("Quadranium", "Protocol", "Greem", 30);
+            Add("Carbonite", "Utility", "Red", true, true, false);
+            Add("Vanadium", "Utility", "Blue", false, false, true);
+            Add("Quadranium", "Utility", "Greem", false, false, false);
+            Add("Carbonite", "Janitor", "Red", true, true, true, true, false);
+            Add("Vanadium", "Janitor", "Blue", false, false, false, false, false);
+            Add("Quadranium", "Janitor", "Greem", true, false, true, false, true);
+            Add("Carbonite", "Astromech", "Red", true, true, true, false, 22);
+            Add("Vanadium", "Astromech", "Blue", false, false, true, false, 1);
+            Add("Quadranium", "Astromech", "Greem", false, true, false, true, 33);
+        }
+
+        public void SortByType()
+        {
+            Stack<IDroid> protocolStack = new Stack<IDroid>();
+            Stack<IDroid> astromechStack = new Stack<IDroid>();
+            Stack<IDroid> utilityStack = new Stack<IDroid>();
+            Stack<IDroid> janitorStack = new Stack<IDroid>();
+
+            Queue<IDroid> idroidQueue = new Queue<IDroid>();
+
+            for (int i = 0; i < lengthOfCollection; i++)
+            {
+
+                if (droidCollection[i] == typeof(ProtocolDroid))
+                {
+                    protocolStack.AddToFront(droidCollection[i]);
+                }
+                if (droidCollection[i] == typeof(UtilityDroid))
+                {
+                    utilityStack.AddToFront(droidCollection[i]);
+                }
+                if (droidCollection[i] == typeof(AstromechDroid))
+                {
+                    astromechStack.AddToFront(droidCollection[i]);
+                }
+                if (droidCollection[i] == typeof(JanitorDroid))
+                {
+                    janitorStack.AddToFront(droidCollection[i]);
+                }
+            }
+
+            //Removes items from the stack and adds them to the queue in order by droid type
+            while (astromechStack.Size > 0)
+            {
+                idroidQueue.AddToBack(astromechStack.RemoveFromFront());
+            }
+            while (janitorStack.Size > 0)
+            {
+                idroidQueue.AddToBack(janitorStack.RemoveFromFront());
+            }
+            while (protocolStack.Size > 0)
+            {
+                idroidQueue.AddToBack(protocolStack.RemoveFromFront());
+            }
+            while (utilityStack.Size > 0)
+            {
+                idroidQueue.AddToBack(utilityStack.RemoveFromFront());
+            }
+            
+            //Adds sorted droids back into array
+            for (int i = 0; i < lengthOfCollection; i++)
+            {
+                droidCollection[i] = idroidQueue.RemoveFromFront();
+            }
+
+        }
     }
 }

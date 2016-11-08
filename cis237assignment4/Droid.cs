@@ -69,7 +69,7 @@ namespace cis237assignment4
                     "Color: " + this.color + Environment.NewLine;
         }
 
-        public virtual int CompareTo(Droid _droid)
+        public virtual int CompareTo(IDroid _droid)
         {
             if (_droid==null)
             {

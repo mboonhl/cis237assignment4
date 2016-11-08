@@ -88,7 +88,7 @@ Be sure to think about what the time complexity for the bucket sort will be. Thi
 
 
 ## Known Problems, Issues, And/Or Errors in the Program
-
+Sort By type is not work
 
 
 ## Assignment 3 Description for reference

@@ -12,6 +12,9 @@ namespace cis237assignment4
     {
         //Private variable to hold the collection of droids
         private IDroid[] droidCollection;
+        //This array is used for the merge 
+        private IDroid[] mergeDroidCollection = new IDroid[100];
+
         //Private variable to hold the length of the Collection
         private int lengthOfCollection;
 
@@ -125,7 +128,7 @@ namespace cis237assignment4
             return returnString;
         }
 
-        private void PreLoadArray()
+        public void PreLoadArray()
         {
             Add("Carbonite", "Protocol", "Red", 10);
             Add("Vanadium", "Protocol", "Blue", 20);
@@ -196,5 +199,63 @@ namespace cis237assignment4
             }
 
         }
+
+        private void Sort(IDroid[] input, int low, int high)
+        {
+            //When high is less than or equal to low the sort is done
+            if (high <= low)
+            {
+                return;
+                
+            }
+            else
+            {
+                int middle = low + (high - low)/2;
+
+                Sort(input, low, middle);
+
+                Sort(input, middle + 1, high);
+
+                Merge(input, low, middle, high);
+            }
+        }
+
+        public void SortByPrice()
+        {
+            Sort(droidCollection, 0, lengthOfCollection - 1);
+        }
+
+        private void Merge(IDroid[] input, int low, int middle, int high)
+        {
+            int _low = low;
+            int _middle = middle + 1;
+
+            for (int l = low; l <= high; l++)
+            {
+                mergeDroidCollection[l] = input[l];
+            }
+
+            for (int l = low; l <= high; l++)
+            {
+                //If low is greater than middle set middle to middle + 1
+                if (_low > middle)
+                {
+                    input[l] = mergeDroidCollection[_middle++];
+                }
+                else if (_middle > high)
+                {
+                    input[l] = mergeDroidCollection[_low++];
+                }
+                else if (mergeDroidCollection[_middle].TotalCost > mergeDroidCollection[_low].TotalCost )
+                {
+                    input[l] = mergeDroidCollection[_middle++];
+                }
+                else
+                {
+                    input[l] = mergeDroidCollection[_low];
+                }
+            }
+        }
+
     }
 }

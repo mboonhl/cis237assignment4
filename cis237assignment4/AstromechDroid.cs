@@ -66,7 +66,7 @@ namespace cis237assignment4
                 "Number Of Ships: " + this.numberOfShips + Environment.NewLine;
         }
 
-        public override int CompareTo(Droid _droid)
+        public override int CompareTo(IDroid _droid)
         {
             return TotalCost.CompareTo(_droid.TotalCost);
         }

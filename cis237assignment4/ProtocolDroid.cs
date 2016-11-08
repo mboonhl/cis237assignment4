@@ -39,7 +39,7 @@ namespace cis237assignment4
                 "Number Of Languages: " + this.numberOfLanguages + Environment.NewLine;
         }
 
-        public override int CompareTo(Droid _droid)
+        public override int CompareTo(IDroid _droid)
         {
             return TotalCost.CompareTo(_droid.TotalCost);
         }
